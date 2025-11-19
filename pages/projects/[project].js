@@ -1,7 +1,7 @@
 import styled, { ThemeContext } from "styled-components";
 import { motion, MotionConfig, useMotionValue } from "framer-motion";
 import React, { useContext, useMemo } from "react";
-import { getProjectList, getProjectDetails } from "@/lib/graphcms";
+import { mockProjects, mockProjectDetails } from "@/lib/mockData";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
 import BackArrow from "@/components/Nav/BackArrow";
@@ -271,7 +271,11 @@ export default function Project({ project, source }) {
 }
 
 export async function getStaticProps({ params }) {
-  const project = (await getProjectDetails(params.project)) || [];
+  // Use mock data directly
+  const project = mockProjectDetails[params.project] || null;
+  if (!project) {
+    return { notFound: true };
+  }
   const source =
     project.content || `<Post><Title>Add project content!</Title></Post>`;
   const mdxSource = await serialize(source);
@@ -281,10 +285,8 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  //Get slugs for boxes, for dynamic routing.
-  const projects = (await getProjectList("all")) || [];
-
-  const paths = projects.map((project) => ({
+  // Use mock data directly - get slugs for dynamic routing
+  const paths = mockProjects.map((project) => ({
     params: { project: project.slug },
   }));
 

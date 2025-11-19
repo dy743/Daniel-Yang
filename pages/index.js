@@ -2,7 +2,7 @@ import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import Banner from "@/components/Banner";
-import { getAllSkills, getAllProjects } from "@/lib/graphcms";
+import { mockSkills, mockProjects } from "@/lib/mockData";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
 import Footer from "@/components/Footer";
@@ -158,8 +158,14 @@ export default function Home({ skills, projects }) {
 }
 
 export async function getStaticProps() {
-  const skills = (await getAllSkills()) || [];
-  const projects = (await getAllProjects()) || [];
+  // Use mock data directly
+  const skills = mockSkills.map(({ title, slug }) => ({ title, slug }));
+  const projects = mockProjects.map(({ slug, title, shortDescription, skills }) => ({
+    slug,
+    title,
+    shortDescription,
+    skills,
+  }));
   return {
     props: { skills, projects },
   };

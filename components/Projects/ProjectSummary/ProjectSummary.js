@@ -174,11 +174,6 @@ export default function ProjectSummary({
   drag = true,
 }) {
   const theme = useContext(ThemeContext);
-
-  // Safety check: if project is invalid, return null
-  if (!project || !project.slug || !project.title) {
-    return null;
-  }
   const hover = useMotionValue(0);
   const scale = useTransform(hover, [0, 1], [1, 1.02]);
 
@@ -268,6 +263,12 @@ export default function ProjectSummary({
     ([latestColor1, latestColor2, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor1, latestColor2])
   );
+
+  // Safety check: if project is invalid, return null (after all hooks)
+  if (!project || !project.slug || !project.title) {
+    return null;
+  }
+
   return (
     <Container
       tabIndex={0}

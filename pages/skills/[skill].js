@@ -1,7 +1,7 @@
 import styled, { ThemeContext } from "styled-components";
 import { animate, motion, MotionConfig, useMotionValue } from "framer-motion";
 import React, { useContext, useEffect } from "react";
-import { getSkillList, getSkillDetails } from "@/lib/graphcms";
+import { mockSkills, mockSkillDetails } from "@/lib/mockData";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
 import Image from "next/image";
@@ -302,17 +302,19 @@ export default function Skill({ skill }) {
 }
 
 export async function getStaticProps({ params }) {
-  const skill = (await getSkillDetails(params.skill)) || [];
+  // Use mock data directly
+  const skill = mockSkillDetails[params.skill] || null;
+  if (!skill) {
+    return { notFound: true };
+  }
   return {
     props: { skill },
   };
 }
 
 export async function getStaticPaths() {
-  //Get slugs for boxes, for dynamic routing.
-  const skills = (await getSkillList("skill-scroller")) || [];
-
-  const paths = skills.map((skill) => ({
+  // Use mock data directly - get slugs for dynamic routing
+  const paths = mockSkills.map((skill) => ({
     params: { skill: skill.slug },
   }));
 

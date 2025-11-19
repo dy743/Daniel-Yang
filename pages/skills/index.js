@@ -1,7 +1,7 @@
 import styled, { ThemeContext } from "styled-components";
 import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
-import { getSkillList } from "@/lib/graphcms";
+import { mockSkills } from "@/lib/mockData";
 import NavBar from "@/components/Nav/NavBar";
 import SkillScroller from "@/components/Skills/SkillScroller";
 import Highlight from "@/components/Highlight";
@@ -319,7 +319,8 @@ export default function Skills({ skills }) {
 }
 
 export async function getStaticProps() {
-  const skills = (await getSkillList("skill-scroller")) || [];
+  // Use mock data directly
+  const skills = mockSkills.map(({ slug, title }) => ({ slug, title }));
   return {
     props: { skills },
   };
