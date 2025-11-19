@@ -49,7 +49,7 @@ const Arrow = styled(motion.button)`
   padding: 0;
 `;
 
-export default function ProjectScroller({ projects, bgColor, primaryColor }) {
+export default function ProjectScroller({ projects = [], bgColor, primaryColor }) {
   const theme = useContext(ThemeContext);
   const [intro, setIntro] = useState(true);
   const [hovering, setHovering] = useState(false);
@@ -57,6 +57,11 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
   const size = useWindowSize();
+
+  // Filter out any invalid projects
+  const validProjects = (projects || []).filter(
+    (project) => project && project.slug && project.title
+  );
 
   useEffect(() => {
     setTimeout(() => setIntro(false), 1000);
@@ -66,17 +71,17 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
     const pan = panPos.on("change", (latest) => {
       if (Math.abs(latest) >= 245) {
         setRollerPos((prev) =>
-          prev + Math.sign(latest * -1) > projects.length - 1
+          prev + Math.sign(latest * -1) > validProjects.length - 1
             ? 0
             : prev + Math.sign(latest * -1) < 0
-            ? projects.length - 1
+            ? validProjects.length - 1
             : prev + Math.sign(latest * -1)
         );
         panPos.set(Math.sign(latest) * -150);
       }
     });
     return () => pan();
-  }, [panPos, projects.length]);
+  }, [panPos, validProjects.length]);
 
   const handlePan = (e, pointInfo) => {
     panPos.set(panPos.get() + pointInfo.delta.x);
@@ -98,11 +103,11 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   };
 
   const incrementRollerPos = () => {
-    setRollerPos((prev) => (prev + 1 > projects.length - 1 ? 0 : prev + 1));
+    setRollerPos((prev) => (prev + 1 > validProjects.length - 1 ? 0 : prev + 1));
   };
 
   const decrementRollerPos = () => {
-    setRollerPos((prev) => (prev - 1 < 0 ? projects.length - 1 : prev - 1));
+    setRollerPos((prev) => (prev - 1 < 0 ? validProjects.length - 1 : prev - 1));
   };
 
   return (
@@ -125,43 +130,43 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
             cursor: panning ? "grabbing" : "grab",
             gridTemplateColumns: `repeat(${Math.min(
               3,
-              projects.length
+              validProjects.length
             )}, 340px)`,
           }}
         >
           {[
-            ...projects.slice(
+            ...validProjects.slice(
               rollerPos,
-              rollerPos + Math.min(3, projects.length)
+              rollerPos + Math.min(3, validProjects.length)
             ),
-            ...projects.slice(
+            ...validProjects.slice(
               0,
-              Math.min(3, projects.length) -
-                projects.slice(
+              Math.min(3, validProjects.length) -
+                validProjects.slice(
                   rollerPos,
-                  rollerPos + Math.min(3, projects.length)
+                  rollerPos + Math.min(3, validProjects.length)
                 ).length
             ),
           ].map((project, index) => {
-            return (
-              <ProjectSummary
-                key={project.slug}
-                id={project.slug}
-                project={project}
-                bgColor={bgColor}
-                primaryColor={primaryColor}
-                outline={
-                  hovering === project.slug || (size.width < 555 && index === 1)
-                }
-                active={!panning}
-                intro={intro}
-                onHover={setHovering}
-                defaultBGColor={theme.primary}
-                delay={0.7 + index * 0.25}
-                scrollerPos={index}
-              />
-            );
-          })}
+              return (
+                <ProjectSummary
+                  key={project.slug}
+                  id={project.slug}
+                  project={project}
+                  bgColor={bgColor}
+                  primaryColor={primaryColor}
+                  outline={
+                    hovering === project.slug || (size.width < 555 && index === 1)
+                  }
+                  active={!panning}
+                  intro={intro}
+                  onHover={setHovering}
+                  defaultBGColor={theme.primary}
+                  delay={0.7 + index * 0.25}
+                  scrollerPos={index}
+                />
+              );
+            })}
         </Summaries>
         {size.width > 555 && (
           <Arrow
