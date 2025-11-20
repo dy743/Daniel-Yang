@@ -54,7 +54,7 @@ export default function Footer() {
         }}
       >
         {`Designed and Developed by `}
-        <Highlight color={theme.teal}>Rory Bourdon</Highlight>
+        <Highlight color={theme.teal}>Daniel Yang</Highlight>
       </Credit>
     </Container>
   );

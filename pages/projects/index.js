@@ -189,10 +189,10 @@ export default function Projects({ projects }) {
         exit="exit"
       >
         <Head>
-          <title>Projects - Rory Bourdon | Web Developer & Visual Artist</title>
+          <title>Projects - Daniel Yang | Web Developer & Visual Artist</title>
           <meta
             name="description"
-            content="Projects - Rory Bourdon | Web Developer & Visual Artist"
+            content="Projects - Daniel Yang | Web Developer & Visual Artist"
           />
         </Head>
         <NavBar links={pageLinks} />

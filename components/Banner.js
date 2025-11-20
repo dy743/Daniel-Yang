@@ -118,7 +118,7 @@ const bgV = {
   },
 };
 
-export default function Banner({ title = "Rory Bourdon" }) {
+export default function Banner({ title = "Daniel Yang" }) {
   const theme = useContext(ThemeContext);
 
   const phase = useMotionValue(0);

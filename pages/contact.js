@@ -162,11 +162,11 @@ export default function Contact() {
       >
         <Head>
           <title>
-            Contact Me - Rory Bourdon | Web Developer & Visual Artist
+            Contact Me - Daniel Yang | Web Developer & Visual Artist
           </title>
           <meta
             name="description"
-            content="Contact Me - Rory Bourdon | Web Developer & Visual Artist"
+            content="Contact Me - Daniel Yang | Web Developer & Visual Artist"
           />
         </Head>
         <NavBar links={pageLinks} />

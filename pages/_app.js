@@ -112,7 +112,7 @@ function MyApp({ Component, pageProps, router }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#00aba9" />
         <meta name="theme-color" content="#ffffff" />
-        <meta name="author" content="Rory Bourdon" />
+        <meta name="author" content="Daniel Yang" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

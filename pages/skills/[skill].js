@@ -234,10 +234,10 @@ export default function Skill({ skill }) {
         exit="exit"
       >
         <Head>
-          <title>{`${skill.title} - Skills - Rory Bourdon | Web Developer & Visual Artist`}</title>
+          <title>{`${skill.title} - Skills - Daniel Yang | Web Developer & Visual Artist`}</title>
           <meta
             name="description"
-            content={`${skill.title} - Skills - Rory Bourdon | Web Developer & Visual Artist`}
+            content={`${skill.title} - Skills - Daniel Yang | Web Developer & Visual Artist`}
           />
         </Head>
         <NavBar links={pageLinks} />

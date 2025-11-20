@@ -116,13 +116,13 @@ export default function Home({ skills, projects }) {
       style={{ backgroundColor: theme.primary }}
     >
       <Head>
-        <title>Rory Bourdon | Web Developer & Visual Artist</title>
-        <meta name="description" content="Portfolio of Rory Bourdon" />
+        <title>Daniel Yang | Web Developer & Visual Artist</title>
+        <meta name="description" content="Portfolio of Daniel Yang" />
         <meta
           name="og:title"
-          content="Rory Bourdon | Web Developer & Visual Artist"
+          content="Daniel Yang | Web Developer & Visual Artist"
         />
-        <meta name="og:description" content="Portfolio of Rory Bourdon" />
+        <meta name="og:description" content="Portfolio of Daniel Yang" />
       </Head>
       <NavBar links={pageLinks} />
       <HorizonEffects

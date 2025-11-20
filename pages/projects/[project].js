@@ -201,10 +201,10 @@ export default function Project({ project, source }) {
         exit="exit"
       >
         <Head>
-          <title>{`${project.title} - Projects - Rory Bourdon | Web Developer & Visual Artist`}</title>
+          <title>{`${project.title} - Projects - Daniel Yang | Web Developer & Visual Artist`}</title>
           <meta
             name="description"
-            content={`${project.title} - Projects - Rory Bourdon | Web Developer & Visual Artist`}
+            content={`${project.title} - Projects - Daniel Yang | Web Developer & Visual Artist`}
           />
         </Head>
         <NavBar links={pageLinks} />
